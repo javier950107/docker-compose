@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #the Deployment Name
+  name: saturno-api-client
+spec:
+  #the Number of Pods
+  replicas: 1
+  selector:
+    matchLabels:
+      role: saturno-api
+  template:
+    metadata:
+      labels:
+        role: saturno-api
+    spec:
+      # Container Details
+      containers:
+      - name: saturno
+        image: javier950107/saturno-api:latest
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/usr/sbin/nginx","-s","quit"]

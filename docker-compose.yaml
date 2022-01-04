@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: frontend
+    image: react-saturno
+    build: 
+      context: ../saturno
+    ports:
+      - "3001:3000"
+    stdin_open: true
+    networks: 
+      - frontend
+      - backend
+  
+  backend:
+    container_name: backend
+    image: saturno-api
+    build:
+      context: ../saturno-api
+    ports:
+      - "3000:3000"
+    networks: 
+      - backend
+
+networks: 
+  frontend:
+  backend:
